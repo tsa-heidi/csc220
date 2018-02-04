@@ -1,7 +1,7 @@
 '''
 @Author Tiffany Xiao
 @Author Mai Ngo
-@Author Karen Karen Santamaria
+@Author Karen Santamaria
 '''
 import glob, os
 from itertools import combinations
