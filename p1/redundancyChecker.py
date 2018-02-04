@@ -13,26 +13,6 @@ from itertools import combinations
 
 
 
-
-class Pair:
-
-    def __init__(self, file1, file2, count):
-        self.file1 = file1
-        self.file2 = file2
-        self.count = count
-
-    def getFile(self):
-        return self.file
-
-    def setCount(self):
-        return self.line
-
-    def __str__(self):
-        result = file + " " + str(line)
-        return result
-
-
-
 def compare(file1, file2):
     count = 0
     
