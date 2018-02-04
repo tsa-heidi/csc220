@@ -1,0 +1,1 @@
+These are my notes and assignments for CSC220 Advanced Programming in Spring 2018. "sprints" are in-class programming exercises. "p" are 1-week group projects
