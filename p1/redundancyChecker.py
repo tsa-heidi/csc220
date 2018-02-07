@@ -3,7 +3,7 @@ File: redundancyChecker.py
 Authors: Tiffany Xiao, Mai Ngo, Karen Santamaria
 Description: Program reads all the files in a specified directory and prints a report of the lines that are identical in any pair of files
 '''
-import glob, os
+import glob, os, re
 from itertools import combinations
 
 
@@ -14,15 +14,17 @@ def compare(file1, file2):
     duplicate_info = ""
 
     with open(file1) as file:
-        lines = [line.strip() for line in file]
+        lines = [line for line in file]
     a = dict((lines[i], i) for i in range(len(lines)))
+
     with open(file2) as file:
-        lines2 = [line.strip() for line in file]
+        lines2 = [line for line in file]
     b = dict((lines2[i], i) for i in range(len(lines2)))
 
     # find intersection of the dictionaries
     for key in a.keys():
         if key in b.keys():
+            if key != "\n":
 
             duplicate_count += 1
             duplicate_info += "*** " + str(a[key]) + " "+  str(b[key]) + " " + key + "\n"
