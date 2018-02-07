@@ -1,6 +1,5 @@
 '''
-Author: Tiffany Xiao
-Collaborators: Karen Santamaria and Quynh Mai
+
 Date: February 1, 2018
 Title: Redundancy Detector
 
@@ -71,17 +70,17 @@ def main():
     ''' Function that asks user for a directory, then prints all python file names and the number of lines in each file'''
 
     # ask user for path
-    path = input("Please indicate path to directory below: \n")
+    #path = input("Please indicate path to directory below: \n")
     # test path: path '/Users/tiffanyxiao/Documents/GitHub/csc220-codingchallenges/Coding Challenge 1"
-    #path = "/Users/karensantamaria/Documents/GitHub/csc220/p1"
+    path = "/Users/karensantamaria/Documents/GitHub/csc220/p1"
 
     # create a try catch block in case of invalid directory inputted
     try:
         # identify all python files in directory
-        textFiles = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+        textFiles = [f for f in os.listdir(path) if (os.path.isfile(os.path.join(path, f)) and not f.startswith("."))]
 
         # get all combinations of textFiles
-        comb = combinations(textFiles, 2) # currently only makes combinations with .py files
+        comb = combinations(textFiles, 2) 
 
         # compare each combination of text files
         for i in list(comb):
