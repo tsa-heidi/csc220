@@ -55,7 +55,8 @@ def compare(path, file1, file2):
 def main():
     ''' Function that asks user for a directory, then prints all python file names and the number of lines in each file'''
 
-    path = raw_input("Please indicate absolute path to directory below: \n")
+    #path = input("Please indicate absolute path to directory below: \n")
+    path = "/Users/karensantamaria/Documents/GitHub/csc220/p1"
 
     # create a try catch block in case of invalid directory inputted
     try:
