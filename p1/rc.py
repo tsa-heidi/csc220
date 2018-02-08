@@ -42,6 +42,7 @@ def compare(path, file1, file2):
                 duplicate_count += 1
                 duplicate_info += "*** " + str(word_line1[1]) + " "+  str(word_line2[1]) + " " + word_line1[0] + "\n"
 
+
     if (duplicate_count != 0):
         print("-------------------------------------")
         print("File 1: ", file1)
@@ -50,10 +51,11 @@ def compare(path, file1, file2):
         print("-------------------------------------")
         print(duplicate_info)
 
+
 def main():
     ''' Function that asks user for a directory, then prints all python file names and the number of lines in each file'''
 
-    path = input("Please indicate absolute path to directory below: \n")
+    path = raw_input("Please indicate absolute path to directory below: \n")
 
     # create a try catch block in case of invalid directory inputted
     try:
