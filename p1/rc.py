@@ -26,6 +26,10 @@ To fix:
 '''
 import glob, os
 from itertools import combinations
+from collections import defaultdict
+
+
+
 
 def compare(path, file1, file2):
     """ Function to compare two files and identify a matching line, then print the matching lines in desired format.
@@ -42,22 +46,32 @@ def compare(path, file1, file2):
     # string with all duplicate lines (and their line numbers)
     stringEnd = ""
 
+
     # create a dictionary using file1 and file2
     with open(path+"/"+file1) as file:
         lines = [line for line in file]
-    a = dict((lines[i].strip(), i+1) for i in range(len(lines)) if lines[i].strip())
+
+
+    a = []
+    for i in range(len(lines)):
+        if lines[i].strip():
+            a.append([lines[i].strip(), i+1])
+
     with open(path+"/"+file2) as file:
         lines2 = [line for line in file]
-    b = dict((lines2[i].strip(), i+1) for i in range(len(lines2)) if lines2[i].strip())
 
-    # find the intersection of the dictionaries (matching keys)
-    for key in a.keys():
-        # if there is an intersection, indicate that a duplicate has been found, increment duplicateCount and add the line to ending
-        if key in b.keys() and key != "\n":
-            duplicateCount += 1
-            stringEnd += "*** " + str(a[key]) + " "+  str(b[key]) + " " + key + "\n"
+    b = []
+    for i in range(len(lines2)):
+        if lines2[i].strip():
+            b.append([lines2[i].strip(), i+1])
 
-    # print file and matches only if a duplicate has been found
+
+    for word_line in a:
+        for word_line2 in b:
+            if word_line[0] == word_line2[0]:
+                duplicateCount += 1
+                stringEnd += "*** " + str(word_line[1]) + " "+  str(word_line2[1]) + " " + word_line[0] + "\n"
+
     if (duplicateCount != 0):
         print("-------------------------------------")
         print("File 1: ", file1)
@@ -80,7 +94,7 @@ def main():
         textFiles = [f for f in os.listdir(path) if (os.path.isfile(os.path.join(path, f)) and not f.startswith("."))]
 
         # get all combinations of textFiles
-        comb = combinations(textFiles, 2) 
+        comb = combinations(textFiles, 2)
 
         # compare each combination of text files
         for i in list(comb):
