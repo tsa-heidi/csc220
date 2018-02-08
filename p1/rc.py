@@ -1,35 +1,14 @@
 '''
-
+Authors: Tiffany Xiao, Mai Ngo, Karen Santamaria
 Date: February 1, 2018
 Title: Redundancy Detector
 
-Objective of challenge:
-write a program that reads all the files in a specified
-directory and prints a report of the lines
-that are identical in any pair of files
 
-Output expected:
--------------------------------------
-File 1: <f1>
-File 2: <f2>
-Number of identical lines: <n>
--------------------------------------
-*** <line_num_f1> < line_num_f2> <line_contents>
-*** <line_num_f1> < line_num_f2> <line_contents>
-
-Description:
-
-To fix:
--reducing garbage & improving efficiency
--test against .py, .txt and .csv
--remove test path
+Program that reads all the files in a specified directory and prints a report of
+lines that are identical in any pair of files
 '''
-import glob, os
+import os
 from itertools import combinations
-from collections import defaultdict
-
-
-
 
 def compare(path, file1, file2):
     """ Function to compare two files and identify a matching line, then print the matching lines in desired format.
@@ -41,52 +20,40 @@ def compare(path, file1, file2):
     """
 
     # count number of duplicate lines
-    duplicateCount = 0
+    duplicate_count = 0
 
     # string with all duplicate lines (and their line numbers)
-    stringEnd = ""
+    duplicate_info = ""
 
 
-    # create a dictionary using file1 and file2
+    # create 2Dlists of file1 and file2 which stores [string, line_num]
+
     with open(path+"/"+file1) as file:
         lines = [line for line in file]
-
-
-    a = []
-    for i in range(len(lines)):
-        if lines[i].strip():
-            a.append([lines[i].strip(), i+1])
+    file1_list = [[lines[i].strip(), i+1] for i in range(len(lines)) if lines[i].strip()]
 
     with open(path+"/"+file2) as file:
         lines2 = [line for line in file]
+    file2_list = [[lines2[i].strip(), i+1] for i in range(len(lines2)) if lines2[i].strip()]
 
-    b = []
-    for i in range(len(lines2)):
-        if lines2[i].strip():
-            b.append([lines2[i].strip(), i+1])
+    for word_line1 in file1_list:
+        for word_line2 in file2_list:
+            if word_line1[0] == word_line2[0]:
+                duplicate_count += 1
+                duplicate_info += "*** " + str(word_line1[1]) + " "+  str(word_line2[1]) + " " + word_line1[0] + "\n"
 
-
-    for word_line in a:
-        for word_line2 in b:
-            if word_line[0] == word_line2[0]:
-                duplicateCount += 1
-                stringEnd += "*** " + str(word_line[1]) + " "+  str(word_line2[1]) + " " + word_line[0] + "\n"
-
-    if (duplicateCount != 0):
+    if (duplicate_count != 0):
         print("-------------------------------------")
         print("File 1: ", file1)
         print("File 2: ", file2)
-        print("Number of identical lines: ", duplicateCount)
+        print("Number of identical lines: ", duplicate_count)
         print("-------------------------------------")
-        print(stringEnd)
+        print(duplicate_info)
 
 def main():
     ''' Function that asks user for a directory, then prints all python file names and the number of lines in each file'''
 
-    # ask user for path
-    #path = input("Please indicate path to directory below: \n")
-    # test path: path '/Users/tiffanyxiao/Documents/GitHub/csc220-codingchallenges/Coding Challenge 1"
-    path = "/Users/karensantamaria/Documents/GitHub/csc220/p1"
+    path = input("Please indicate absolute path to directory below: \n")
 
     # create a try catch block in case of invalid directory inputted
     try:
