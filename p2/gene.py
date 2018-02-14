@@ -48,6 +48,8 @@ def intersection(string1, string2, len_string1, len_string2):
         for row in range (0,len_string2):
             if (string1[col] == string2[row]):
                 matrix[row][col] = 1
+    #for every cell in the matrix, add the value of the upper-reight cell to the current cell
+    #so the value of the cells will be the number of cosecutive match if there is any
     largest_count = 0
     index_of_largest = []
     for col in range (0,len_string1):
@@ -58,8 +60,8 @@ def intersection(string1, string2, len_string1, len_string2):
                     largest_count = matrix[row][col]
                     index_of_largest = [row,col]
 
+    #construct the substring
     overlap = string1[index_of_largest[1]]
-
     for l in range(1, largest_count):
         overlap = string1[index_of_largest[1]-l]+overlap
     return overlap
