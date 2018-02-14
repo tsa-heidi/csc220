@@ -32,6 +32,7 @@ correctly returns the shortest string that contains both input strings as a subs
 
 
 def intersection(string1, string2, len_string1, len_string2):
+    #fill in everything with zeros
     matrix = [[0 for col in range(len_string1+1)] for row in range(len_string2+1)]
     #string1 is associated with horizontal diraction
     #string2 is associated with vertical direction
@@ -46,17 +47,21 @@ def intersection(string1, string2, len_string1, len_string2):
             if (col == 0):
                 matrix[row+1][col] = string2[row]
 
+    #fill in 1's with matches
     for col in range (1,len_string1+1):
         for row in range (1,len_string2+1):
             if (matrix[0][col] == matrix[row][0]):
                 matrix[row][col] = 1
+
+    #fill in unused spot
     matrix[0][0] = "-"
+
     ##end building matrix
 
     long_str = ""
     long_str_len = 0
-#start searching for matches
 
+    #start searching for matches
     for i in range(1,len_string1+1):
         for j in range
         matrix[i][i]="-"
