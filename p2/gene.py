@@ -29,65 +29,44 @@ is more efficient than the recursive solution
 correctly returns the shortest string that contains both input strings as a subsequence
 *Note* to get efficiency-related points, you must include a brief discussion of the program's efficiency in your README
 '''
+#import numpy as np
+def shortest_string(string1, string2,substring):
 
 
+    return short
 def intersection(string1, string2, len_string1, len_string2):
     #fill in everything with zeros
-    matrix = [[0 for col in range(len_string1+1)] for row in range(len_string2+1)]
+    matrix = [[0 for col in range(len_string1)] for row in range(len_string2)]
     #string1 is associated with horizontal diraction
     #string2 is associated with vertical direction
 
-
-
-    ##start building matrix todo find a better way to insert letters
-    for col in range (len_string1):
-        for row in range (len_string2):
-            if (row == 0):
-                matrix[row][col+1] = string1[col]
-            if (col == 0):
-                matrix[row+1][col] = string2[row]
-
-    matchList =  []
     #fill in 1's with matches
     for col in range (0,len_string1):
         for row in range (0,len_string2):
-            if (matrix[row][col] == matrix[row][0]):
+            if (string1[col] == string2[row]):
                 matrix[row][col] = 1
-                #matrix[row][col] = [row,col] #temp
-                matchList.append([row,col])
-            # else:
-            #     matrix[row][col] = [0,0] #temp
+    largest_count = 0
+    index_of_largest = []
+    for col in range (0,len_string1):
+        for row in range (0,len_string2):
+            if matrix[row][col] == 1 and row!=0 and col!=0:
+                matrix[row][col] = matrix[row][col] + matrix[row-1][col-1]
+                if matrix[row][col]>largest_count:
+                    largest_count = matrix[row][col]
+                    index_of_largest = [row,col]
 
-    print(matchList)
     help_print(matrix)
 
-    #fill in unused spot
-    matrix[0][0] = "-"
+    overlap = string1[index_of_largest[1]]
 
-     for pair in matchList:
-         i = pair[0]
-         j = pair[1]
-         if matrix[i+1][j+1] == 1:
-
-    ##end building matrix
-    long_str = ""
-    long_str_len = 0
+    for l in range(1, largest_count):
+        overlap = string1[index_of_largest[1]-l]+overlap
+    return overlap
 
 
 
-def countList(listOfList):
-    length = []
-    for list in listOfList:
-        best_count = 0
-        current_count = 0
-        for i in list:
-            if list[i]==1:
-                current_count = current_count+1
-                if current_count > best_count:
-                    best_count = current_count
-            else:
-                current_count = 0
-        length.append(best_count)
+
+
 
 def help_see(matrix):
     '''see how numbers are changed loop by loop through the matrix'''
