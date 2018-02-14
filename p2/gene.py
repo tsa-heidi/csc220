@@ -63,9 +63,9 @@ def intersection(string1, string2, len_string1, len_string2):
 
     #start searching for matches
     for i in range(1,len_string1+1):
-        for j in range
-        matrix[i][i]="-"
-    help_print(matrix)
+            matrix[i][i]="-"
+            help_print(matrix)
+        
 
 
 
