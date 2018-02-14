@@ -29,43 +29,40 @@ is more efficient than the recursive solution
 correctly returns the shortest string that contains both input strings as a subsequence
 *Note* to get efficiency-related points, you must include a brief discussion of the program's efficiency in your README
 '''
-
+import numpy as np
 
 def intersection(string1, string2, len_string1, len_string2):
     #fill in everything with zeros
-    matrix = [[0 for col in range(len_string1+1)] for row in range(len_string2+1)]
+    matrix = [[0 for col in range(len_string1)] for row in range(len_string2)]
     #string1 is associated with horizontal diraction
     #string2 is associated with vertical direction
 
 
-
-    ##start building matrix todo find a better way to insert letters
-    for col in range (len_string1):
-        for row in range (len_string2):
-            if (row == 0):
-                matrix[row][col+1] = string1[col]
-            if (col == 0):
-                matrix[row+1][col] = string2[row]
-
     #fill in 1's with matches
-    for col in range (1,len_string1+1):
-        for row in range (1,len_string2+1):
-            if (matrix[0][col] == matrix[row][0]):
+    for col in range (0,len_string1):
+        for row in range (0,len_string2):
+            if (string1[col] == string2[row]):
                 matrix[row][col] = 1
+
+
+
+
+    help_print(matrix)
 
     #fill in unused spot
     matrix[0][0] = "-"
 
-    ##end building matrix
+    a = np.array(matrix)
+    diags = [a[::-1,:].diagonal(i) for i in range(-a.shape[0]+1,a.shape[1])]
+    print(diags)
 
+
+
+
+    ##end building matrix
     long_str = ""
     long_str_len = 0
 
-    #start searching for matches
-    for i in range(1,len_string1+1):
-            matrix[i][i]="-"
-            help_print(matrix)
-        
 
 
 
